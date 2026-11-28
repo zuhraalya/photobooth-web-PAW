@@ -4,27 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photobooth - Photo Editor</title>
+    <title>Photobooth - Photo Preview</title>
 </head>
 <body>
 
     <main class="editor-container">
 
-        <!-- Bagian Preview -->
+        <!-- Bagian Preview Foto -->
         <section class="preview-section">
 
             <h1>preview</h1>
 
-            <div class="preview-header">
-                <p>See Your Photo</p>
+            <div class="preview-card">
+
+                <div class="preview-header">
+                    <p>See Your Photo</p>
+                </div>
+
+                <div class="photo-preview">
+                    <!-- Foto hasil pengambilan akan ditampilkan di sini -->
+                </div>
+
             </div>
 
-            <div class="photo-preview">
-                <!-- Area untuk menampilkan foto -->
-            </div>
-
-            <button type="button" class="preview-button">
-                Open the booth
+            <button type="button" class="retake-button">
+                Retake
             </button>
 
         </section>
@@ -34,8 +38,8 @@
         <section class="note-section">
 
             <div class="note-heading">
-                <h2>Add a note to your photos</h2>
-                <p>Special one to someone</p>
+                <h2>Wanna add a note?</h2>
+                <p>Special to someone</p>
             </div>
 
             <div class="note-input-container">
@@ -52,8 +56,8 @@
 
             </div>
 
-            <button type="button" class="note-button">
-                Open the booth
+            <button type="button" class="finish-button">
+                Finish
             </button>
 
         </section>
