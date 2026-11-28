@@ -2,14 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* =====================================================================
-   FONT Postal Club (sesuai design system Figma).
-   Urutan sumber tiap font:
-   1) file lokal di resources/fonts/<NamaFont>/  -> paling aman untuk demo/pengumpulan
-   2) URL Figma (@font-face asli dari kode Figma)  -> cadangan
-   3) fonts.bunny.net (lihat <link> di postal-layout.blade.php) -> cadangan terakhir
-   Path file lokal mengikuti struktur folder hasil unduhan Google Fonts di bawah ini.
-   ===================================================================== */
+/* Font */
 @font-face {
     font-family: 'Postal Cormorant';
     src: url('../fonts/Cormorant_Garamond/static/cormorant-garamond-regular.ttf') format('truetype'),
@@ -51,16 +44,7 @@
     font-display: swap;
 }
 
-/* =====================================================================
-   POSTAL CLUB - halaman auth (login & register)
-   Semua gaya di-scope ke body.pc-app supaya halaman Breeze lain
-   (dashboard, profil) tidak ikut berubah.
-
-   Ilustrasi (.pc-letter) memakai satuan cqw: 1cqw = 1% lebar kartu.
-   Artinya seluruh isi kartu mengecil/membesar proporsional, jadi
-   susunannya tidak bergeser di layar apa pun. Desain asli 600px lebar,
-   jadi 6px = 1cqw.
-   ===================================================================== */
+/* Halaman login dan register */
 .pc-app {
     --pc-bg: #fff7eb;
     --pc-paper: #ffefd7;
@@ -91,7 +75,7 @@
 .pc-app button,
 .pc-app input { outline-color: var(--pc-teal); }
 
-/* ---------- Header ---------- */
+/* Header */
 .pc-app .pc-header {
     min-height: 154px;
     display: grid;
@@ -131,7 +115,7 @@
 .pc-app .pc-stamp { width: 96px; justify-self: end; line-height: 0; }
 .pc-app .pc-stamp img { width: 100%; height: auto; display: block; }
 
-/* ---------- Konten ---------- */
+/* Konten utama */
 .pc-app .pc-main {
     display: grid;
     grid-template-columns: minmax(440px, 600px) minmax(340px, 1fr);
@@ -140,7 +124,7 @@
     padding: 32px 6vw 56px;
 }
 
-/* ---------- Kartu ilustrasi kiri ---------- */
+/* Ilustrasi */
 .pc-app .pc-letter {
     position: relative;
     width: 100%;
@@ -188,7 +172,7 @@
     line-height: 1.45;
 }
 
-/* garis amplop airmail (login) */
+/* Garis tepi amplop */
 .pc-app .pc-airmail {
     position: absolute;
     inset: 0 0 auto;
@@ -203,7 +187,7 @@
 }
 .pc-app .pc-airmail--bottom { inset: auto 0 0; }
 
-/* strip foto */
+/* Strip foto */
 .pc-app .pc-strips {
     position: absolute;
     top: 26.67cqw;
@@ -248,7 +232,7 @@
     transform: rotate(12deg);
 }
 
-/* kartu pos (register): semua posisi dalam persen dari kartu */
+/* Kartu pos pada halaman register */
 .pc-app .pc-postcard {
     position: absolute;
     left: 6.5%;
@@ -296,7 +280,7 @@
     font-family: var(--pc-tangerine); font-size: 3cqw;
 }
 
-/* ---------- Panel form kanan ---------- */
+/* Form autentikasi */
 .pc-app .pc-auth {
     width: 100%;
     max-width: 520px;
@@ -369,7 +353,7 @@
 .pc-app .pc-switch { display: flex; justify-content: center; gap: 6px; margin: 0; font-size: 14px; line-height: 1.45; }
 .pc-app .pc-switch a { color: var(--pc-teal); font-weight: 500; text-decoration: underline; }
 
-/* ---------- Footer ---------- */
+/* Footer */
 .pc-app .pc-footer {
     min-height: 112px;
     display: grid;
@@ -385,7 +369,7 @@
 .pc-app .pc-footer p:nth-child(2) { font-family: var(--pc-script); font-size: 28px; }
 .pc-app .pc-footer p:last-child { justify-self: end; font-size: 11px; letter-spacing: 1.5px; }
 
-/* ---------- Responsif ---------- */
+/* Tampilan responsif */
 @media (max-width: 1050px) {
     .pc-app .pc-header { grid-template-columns: 1fr auto; }
     .pc-app .pc-menu { order: 3; grid-column: 1 / -1; justify-content: center; }
