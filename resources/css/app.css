@@ -1,9 +1,248 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Dawning+of+a+New+Day&family=Inter:wght@400;500;600;700&family=Tangerine:wght@400;700&display=swap');
+
 @import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Inter', sans-serif;
+    --font-script: 'Dawning of a New Day', cursive;
+    --font-tangerine: 'Tangerine', cursive;
+}
+
+/* =================================
+   POSTAL CLUB - DESIGN TOKENS
+================================= */
+
+:root {
+    --color-background: #FFF7EB;
+    --color-paper: #FFEFD7;
+    --color-ink: #563319;
+    --color-white: #FFFFFF;
+    --color-text-secondary: #8B6B53;
+    --color-placeholder: #C7AE98;
+
+    --shadow-photo: 0 4px 10px rgba(86, 51, 25, 0.20);
+}
+
+/* =================================
+   GENERAL
+================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-ink);
+}
+
+.editor-container {
+    width: 100%;
+    max-width: 1440px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 60px 8%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7%;
+}
+
+/* =================================
+   PREVIEW SECTION
+================================= */
+
+.preview-section {
+    width: 36%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.preview-section h1 {
+    font-size: 34px;
+    font-weight: 600;
+    margin: 0 0 16px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.preview-card {
+    width: 100%;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+}
+
+.preview-header {
+    width: 100%;
+    min-height: 67px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-ink);
+    border-radius: 12px;
+    margin-bottom: 32px;
+}
+
+.preview-header p {
+    font-family: 'Tangerine', cursive;
+    font-size: 42px;
+    font-weight: 700;
+    color: #FFF7EB;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.photo-preview {
+    width: 100%;
+    aspect-ratio: 3 / 4.8;
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-photo);
+}
+
+/* =================================
+   NOTE SECTION
+================================= */
+
+.note-section {
+    width: 64%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.note-heading {
+    width: 100%;
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.note-heading h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0 0 6px;
+}
+
+.note-heading p {
+    font-family: 'Dawning of a New Day', cursive;
+    font-size: 32px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.note-input-container {
+    width: 100%;
+}
+
+.note-input-container textarea {
+    display: block;
+    width: 100%;
+    min-height: 565px;
+    padding: 18px;
+    resize: none;
+
+    background-color: var(--color-paper);
+    border: 3px solid var(--color-ink);
+    border-radius: 11px;
+
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: var(--color-ink);
+    outline: none;
+}
+
+.note-input-container textarea::placeholder {
+    color: var(--color-placeholder);
+    font-family: 'Inter', sans-serif;
+}
+
+.note-input-container textarea:focus {
+    box-shadow: 0 0 0 2px rgba(86, 51, 25, 0.12);
+}
+
+.character-counter {
+    text-align: right;
+    font-family: 'Dawning of a New Day', cursive;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--color-text-secondary);
+    margin: 10px 12px 0 0;
+}
+
+/* =================================
+   BUTTONS
+================================= */
+
+.retake-button,
+.finish-button {
+    width: 330px;
+    min-height: 60px;
+    margin-top: 30px;
+
+    background-color: transparent;
+    border: 1.5px solid var(--color-ink);
+    border-radius: 22px;
+
+    color: var(--color-ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 21px;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.retake-button:hover,
+.finish-button:hover {
+    background-color: var(--color-ink);
+    color: var(--color-background);
+}
+
+/* =================================
+   RESPONSIVE
+================================= */
+
+@media (max-width: 900px) {
+    .editor-container {
+        flex-direction: column;
+        gap: 50px;
+        padding: 40px 24px;
+    }
+
+    .preview-section,
+    .note-section {
+        width: 100%;
+        max-width: 520px;
+    }
+
+    .note-input-container textarea {
+        min-height: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .preview-section h1 {
+        font-size: 28px;
+    }
+
+    .note-heading h2 {
+        font-size: 23px;
+    }
+
+    .note-heading p {
+        font-size: 21px;
+    }
+
+    .retake-button,
+    .finish-button {
+        width: 100%;
+    }
 }
