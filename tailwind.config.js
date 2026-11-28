@@ -13,6 +13,22 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                // Design system Postal Club
+                display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                body: ['Inter', ...defaultTheme.fontFamily.sans],
+                script: ['"Dawning of a New Day"', '"Segoe Script"', 'cursive'],
+                tangerine: ['Tangerine', 'cursive'],
+            },
+            colors: {
+                postal: {
+                    bg: '#fff7eb',
+                    paper: '#ffefd7',
+                    brown: '#563319',
+                    blue: '#9bbbc5',
+                    sky: '#cfe3e9',
+                    teal: '#456c79',
+                    rose: '#db7476',
+                },
             },
         },
     },

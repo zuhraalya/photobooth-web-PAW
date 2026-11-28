@@ -1,52 +1,52 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+<x-postal-layout title="Join the club">
+    {{-- Kartu ilustrasi (hiasan) --}}
+    <section class="pc-letter pc-letter--register" aria-hidden="true">
+        <p class="pc-eyebrow">A place for your little memories</p>
+        <p class="pc-letter-title">Consider this<br>your invitation.</p>
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+        <div class="pc-postcard">
+            <img class="pc-paper" src="{{ asset('images/postal/paper.jpg') }}" alt="">
+
+            <div class="pc-postcard-strip"><x-postal.strip /></div>
+
+            <img class="pc-postmark pc-postmark--1" src="{{ asset('images/postal/postmark.png') }}" alt="">
+            <img class="pc-postmark pc-postmark--2" src="{{ asset('images/postal/postmark.png') }}" alt="">
+            <img class="pc-postmark pc-postmark--3" src="{{ asset('images/postal/postmark.png') }}" alt="">
+            <p class="pc-smudge">Postal Club</p>
+
+            <p class="pc-postcard-title">POSTCARD</p>
+            <div class="pc-postcard-divider"></div>
+            <img class="pc-postcard-stamp" src="{{ asset('images/postal/stamp.png') }}" alt="">
+
+            <p class="pc-postcard-note">A little piece of today, sent with love from Postal Club.</p>
+            <div class="pc-address"><span></span><span></span><span></span><span></span></div>
+            <p class="pc-postcard-date">10/11/2026</p>
         </div>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <p class="pc-handwritten">There’s a place for you here.</p>
+    </section>
+
+    {{-- Form --}}
+    <section class="pc-auth">
+        <a href="{{ url('/') }}" class="pc-back">←&nbsp;&nbsp;Back to the booth</a>
+
+        <div class="pc-heading">
+            <p class="pc-eyebrow">Your first letter starts here</p>
+            <h1>Join the club.</h1>
+            <p>For everyday moments and the people in them.<br>Make yourself at home — your first frame is waiting.</p>
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+        <form method="POST" action="{{ route('register') }}" class="pc-form">
+            @csrf
+            <div class="pc-fields">
+                <x-postal.field name="name" label="Your name" placeholder="What should we call you?" autofocus autocomplete="name" />
+                <x-postal.field name="email" label="Email address" type="email" placeholder="you@example.com" autocomplete="username" />
+                <x-postal.field name="password" label="Password" type="password" placeholder="Create a password" hint="A little secret, at least 8 characters long." autocomplete="new-password" />
+            </div>
+            <button class="pc-submit" type="submit">Create account</button>
+        </form>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+        <p class="pc-terms">By joining, you agree to our <span>Terms of Service</span> and <span>Privacy Policy</span>.</p>
+        <p class="pc-switch">Already part of the club? <a href="{{ route('login') }}">Log in</a></p>
+    </section>
+</x-postal-layout>

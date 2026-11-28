@@ -1,3 +1,407 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* =====================================================================
+   FONT Postal Club (sesuai design system Figma).
+   Urutan sumber tiap font:
+   1) file lokal di resources/fonts/<NamaFont>/  -> paling aman untuk demo/pengumpulan
+   2) URL Figma (@font-face asli dari kode Figma)  -> cadangan
+   3) fonts.bunny.net (lihat <link> di postal-layout.blade.php) -> cadangan terakhir
+   Path file lokal mengikuti struktur folder hasil unduhan Google Fonts di bawah ini.
+   ===================================================================== */
+@font-face {
+    font-family: 'Postal Cormorant';
+    src: url('../fonts/Cormorant_Garamond/static/cormorant-garamond-regular.ttf') format('truetype'),
+         url('https://static.figma.com/font/CormorantGaramond_wght__1') format('woff2');
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Postal Dawning';
+    src: url('../fonts/Dawning_of_a_New_Day/dawning-of-a-new-day-regular.ttf') format('truetype'),
+         url('https://static.figma.com/font/DawningofaNewDay_1') format('woff2');
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Postal Tangerine';
+    src: url('../fonts/Tangerine/tangerine-regular.ttf') format('truetype'),
+         url('https://static.figma.com/font/Tangerine-Regular_1') format('woff2');
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Postal Inter';
+    src: url('../fonts/Inter/static/inter-regular.ttf') format('truetype'),
+         url('https://static.figma.com/font/Inter_1') format('woff2');
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Postal Inter';
+    src: url('../fonts/Inter/static/inter-medium.ttf') format('truetype'),
+         url('https://static.figma.com/font/Inter_1') format('woff2');
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+}
+
+/* =====================================================================
+   POSTAL CLUB - halaman auth (login & register)
+   Semua gaya di-scope ke body.pc-app supaya halaman Breeze lain
+   (dashboard, profil) tidak ikut berubah.
+
+   Ilustrasi (.pc-letter) memakai satuan cqw: 1cqw = 1% lebar kartu.
+   Artinya seluruh isi kartu mengecil/membesar proporsional, jadi
+   susunannya tidak bergeser di layar apa pun. Desain asli 600px lebar,
+   jadi 6px = 1cqw.
+   ===================================================================== */
+.pc-app {
+    --pc-bg: #fff7eb;
+    --pc-paper: #ffefd7;
+    --pc-brown: #563319;
+    --pc-blue: #9bbbc5;
+    --pc-blue-hover: #abc8d1;
+    --pc-sky: #cfe3e9;
+    --pc-teal: #456c79;
+    --pc-rose: #db7476;
+    --pc-error: #b4474a;
+
+    --pc-display: 'Postal Cormorant', 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --pc-script: 'Postal Dawning', 'Dawning of a New Day', 'Segoe Script', 'Brush Script MT', cursive;
+    --pc-tangerine: 'Postal Tangerine', 'Tangerine', 'Segoe Script', cursive;
+    --pc-body: 'Postal Inter', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+    min-width: 320px;
+    min-height: 100dvh;
+    overflow-x: clip;
+    background: var(--pc-bg);
+    color: var(--pc-brown);
+    font-family: var(--pc-body);
+    font-synthesis: none;
+    -webkit-font-smoothing: antialiased;
+}
+
+.pc-app a,
+.pc-app button,
+.pc-app input { outline-color: var(--pc-teal); }
+
+/* ---------- Header ---------- */
+.pc-app .pc-header {
+    min-height: 154px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 40px;
+    padding: 24px 6vw;
+}
+
+.pc-app .pc-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    justify-self: start;
+    text-decoration: none;
+}
+.pc-app .pc-intro span:first-child { font-size: 12px; letter-spacing: 1.8px; line-height: 1.5; text-transform: uppercase; }
+.pc-app .pc-intro span:last-child  { font-size: 15px; line-height: 1.5; }
+
+.pc-app .pc-menu {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+.pc-app .pc-menu a { white-space: nowrap; color: var(--pc-teal); font-weight: 500; text-decoration: none; }
+.pc-app .pc-menu a:first-child { color: var(--pc-brown); font-weight: 400; }
+.pc-app .pc-menu a.is-active {
+    color: var(--pc-brown);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.pc-app .pc-menu a:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+.pc-app .pc-stamp { width: 96px; justify-self: end; line-height: 0; }
+.pc-app .pc-stamp img { width: 100%; height: auto; display: block; }
+
+/* ---------- Konten ---------- */
+.pc-app .pc-main {
+    display: grid;
+    grid-template-columns: minmax(440px, 600px) minmax(340px, 1fr);
+    align-items: center;
+    gap: clamp(56px, 8vw, 128px);
+    padding: 32px 6vw 56px;
+}
+
+/* ---------- Kartu ilustrasi kiri ---------- */
+.pc-app .pc-letter {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    overflow: hidden;
+    container-type: inline-size;
+}
+.pc-app .pc-letter--login    { aspect-ratio: 600 / 648; background: var(--pc-paper); }
+.pc-app .pc-letter--register { aspect-ratio: 600 / 700; background: var(--pc-blue); }
+
+.pc-app .pc-eyebrow {
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.45;
+    letter-spacing: 1.7px;
+    text-transform: uppercase;
+}
+.pc-app .pc-letter > .pc-eyebrow {
+    position: absolute;
+    left: 8%;
+    font-size: clamp(7px, 1.83cqw, 11px);
+    letter-spacing: 0.28cqw;
+}
+.pc-app .pc-letter--login > .pc-eyebrow    { top: 6cqw; }
+.pc-app .pc-letter--register > .pc-eyebrow { top: 6.67cqw; }
+
+.pc-app .pc-letter-title {
+    position: absolute;
+    left: 8%;
+    margin: 0;
+    font-family: var(--pc-display);
+    font-weight: 400;
+    line-height: 1.04;
+}
+.pc-app .pc-letter--login .pc-letter-title    { top: 12.67cqw; font-size: 10.17cqw; white-space: nowrap; }
+.pc-app .pc-letter--register .pc-letter-title { top: 14cqw;    font-size: 10.8cqw; }
+
+.pc-app .pc-handwritten {
+    position: absolute;
+    left: 8%;
+    bottom: 3.67cqw;
+    margin: 0;
+    font-family: var(--pc-script);
+    font-size: 5.83cqw;
+    line-height: 1.45;
+}
+
+/* garis amplop airmail (login) */
+.pc-app .pc-airmail {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 1.33cqw;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--pc-rose) 0 4.1667cqw,
+        var(--pc-bg) 4.1667cqw 8.3333cqw,
+        var(--pc-teal) 8.3333cqw 12.5cqw,
+        var(--pc-bg) 12.5cqw 16.6667cqw
+    );
+}
+.pc-app .pc-airmail--bottom { inset: auto 0 0; }
+
+/* strip foto */
+.pc-app .pc-strips {
+    position: absolute;
+    top: 26.67cqw;
+    left: 24%;
+    display: flex;
+    gap: 9cqw;
+}
+.pc-app .pc-strip {
+    position: relative;
+    width: 16cqw;
+    height: 62.67cqw;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5cqw;
+    padding: 4.33cqw 1.17cqw 4cqw;
+}
+.pc-app .pc-strip--brown { color: var(--pc-paper); background: var(--pc-brown); transform: rotate(-8deg); }
+.pc-app .pc-strip--blue  { color: var(--pc-brown); background: var(--pc-blue);  transform: rotate(7deg); }
+.pc-app .pc-strip__slot  { flex: 1; min-height: 0; background: var(--pc-sky); border: 0.4px solid #d3b689; }
+.pc-app .pc-strip__brand {
+    position: absolute; top: 1.33cqw; left: 5cqw;
+    font-family: var(--pc-script); font-size: 1.5cqw; white-space: nowrap;
+}
+.pc-app .pc-strip__sign {
+    position: absolute; top: 35.67cqw; left: -0.67cqw;
+    color: var(--pc-blue);
+    font-family: var(--pc-script); font-size: 5.17cqw; white-space: nowrap;
+    transform: rotate(-14deg);
+}
+.pc-app .pc-strip--blue .pc-strip__sign { color: var(--pc-brown); }
+.pc-app .pc-strip__date {
+    position: absolute; bottom: 1cqw; left: 5.83cqw;
+    font-family: var(--pc-tangerine); font-size: 1.5cqw; white-space: nowrap;
+}
+
+.pc-app .pc-postmark--login {
+    position: absolute;
+    top: 76.17cqw;
+    left: 64%;
+    width: 18.33cqw;
+    height: auto;
+    transform: rotate(12deg);
+}
+
+/* kartu pos (register): semua posisi dalam persen dari kartu */
+.pc-app .pc-postcard {
+    position: absolute;
+    left: 6.5%;
+    top: 40.83cqw;
+    width: 84%;
+    aspect-ratio: 1.5;
+    overflow: hidden;
+    background: #fff5e6;
+    transform: rotate(-3deg);
+    box-shadow: 0 0.6cqw 1.8cqw rgba(86, 51, 25, 0.22);
+}
+.pc-app .pc-postcard > * { position: absolute; }
+
+.pc-app .pc-paper { inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.28; mix-blend-mode: multiply; }
+
+.pc-app .pc-postcard-strip { left: 16%; top: 6.6%; transform: scale(0.765); transform-origin: top left; }
+.pc-app .pc-postcard .pc-strip--brown { transform: rotate(-6deg); }
+
+.pc-app .pc-postcard-title {
+    top: 8.4%; left: 50.6%; margin: 0;
+    transform: translateX(-50%);
+    font-family: var(--pc-display); font-size: 3cqw; letter-spacing: 0.1cqw;
+}
+.pc-app .pc-postcard-divider { left: 50%; top: 16%; height: 68%; width: 1px; background: rgba(86, 51, 25, 0.85); }
+.pc-app .pc-postcard-stamp   { right: 4%; top: 6%; width: 15%; height: auto; }
+
+.pc-app .pc-postmark { width: 14%; height: auto; mix-blend-mode: multiply; }
+.pc-app .pc-postmark--1 { left: 34%; top: 16.6%; transform: rotate(8deg);   opacity: 0.7; }
+.pc-app .pc-postmark--2 { left: 30%; top: 29.6%; transform: rotate(-12deg); opacity: 0.6; }
+.pc-app .pc-postmark--3 { left: 40%; top: 39.6%; transform: rotate(15deg);  opacity: 0.65; }
+.pc-app .pc-smudge {
+    left: 33%; top: 49.5%; margin: 0;
+    color: var(--pc-rose); opacity: 0.45;
+    font-family: var(--pc-script); font-size: 3.2cqw; transform: rotate(-8deg); white-space: nowrap;
+}
+
+.pc-app .pc-address { left: 56%; top: 62%; width: 40%; display: grid; gap: 3.67cqw; }
+.pc-app .pc-address span { display: block; height: 1px; background: rgba(86, 51, 25, 0.8); }
+.pc-app .pc-postcard-note {
+    left: 56%; top: calc(62% - 3.67cqw); width: 41%; margin: 0;
+    font-family: var(--pc-script); font-size: 2.5cqw; line-height: 3.67cqw;
+}
+.pc-app .pc-postcard-date {
+    right: 22%; bottom: 8%; margin: 0;
+    font-family: var(--pc-tangerine); font-size: 3cqw;
+}
+
+/* ---------- Panel form kanan ---------- */
+.pc-app .pc-auth {
+    width: 100%;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    animation: pc-in 320ms ease-out;
+}
+@keyframes pc-in { from { opacity: 0; transform: translateY(8px); } }
+@media (prefers-reduced-motion: reduce) { .pc-app .pc-auth { animation: none; } }
+
+.pc-app .pc-back { align-self: flex-start; color: var(--pc-teal); font-size: 14px; line-height: 1.45; text-decoration: none; }
+.pc-app .pc-back:hover { text-decoration: underline; }
+
+.pc-app .pc-heading { display: flex; flex-direction: column; gap: 12px; }
+.pc-app .pc-heading h1 {
+    margin: 0;
+    font-family: var(--pc-display);
+    font-weight: 400;
+    font-size: clamp(48px, 4.3vw, 62px);
+    line-height: 1.04;
+}
+.pc-app .pc-heading p:last-child { margin: 0; font-size: 16px; line-height: 1.45; }
+
+.pc-app .pc-status { padding: 12px 16px; border: 1px solid var(--pc-brown); background: var(--pc-paper); font-size: 14px; }
+
+.pc-app .pc-form { display: flex; flex-direction: column; gap: 24px; }
+.pc-app .pc-fields { display: flex; flex-direction: column; gap: 20px; }
+
+.pc-app .pc-field { display: flex; flex-direction: column; gap: 8px; font-size: 16px; font-weight: 500; line-height: 24px; }
+.pc-app .pc-field input {
+    width: 100%;
+    height: 56px;
+    padding: 0 16px;
+    border: 1px solid var(--pc-brown);
+    border-radius: 8px;
+    background-color: var(--pc-bg);
+    color: var(--pc-brown);
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 400;
+    box-shadow: none;
+    transition: box-shadow 150ms ease, background-color 150ms ease;
+}
+.pc-app .pc-field input::placeholder { color: rgb(86 51 25 / 70%); }
+.pc-app .pc-field input:focus { background-color: #fff; border-color: var(--pc-brown); box-shadow: 0 0 0 3px rgb(155 187 197 / 45%); outline: none; }
+.pc-app .pc-field input.is-invalid { border-color: var(--pc-error); }
+.pc-app .pc-field small { font-size: 12px; font-weight: 400; line-height: 20px; }
+.pc-app .pc-field .pc-error { margin: 0; color: var(--pc-error); font-size: 13px; font-weight: 400; line-height: 20px; }
+
+.pc-app .pc-submit {
+    width: 100%;
+    height: 56px;
+    border: 1px solid var(--pc-blue);
+    border-radius: 20px;
+    background: var(--pc-blue);
+    color: var(--pc-brown);
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 150ms ease, background-color 150ms ease;
+}
+.pc-app .pc-submit:hover  { background: var(--pc-blue-hover); transform: translateY(-1px); }
+.pc-app .pc-submit:active { transform: translateY(1px); }
+
+.pc-app .pc-terms { margin: -8px 0 0; text-align: center; font-size: 12px; line-height: 1.45; }
+.pc-app .pc-terms span { text-decoration: underline; }
+
+.pc-app .pc-switch { display: flex; justify-content: center; gap: 6px; margin: 0; font-size: 14px; line-height: 1.45; }
+.pc-app .pc-switch a { color: var(--pc-teal); font-weight: 500; text-decoration: underline; }
+
+/* ---------- Footer ---------- */
+.pc-app .pc-footer {
+    min-height: 112px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 32px;
+    padding: 32px 6vw;
+    border-top: 1px solid var(--pc-brown);
+    white-space: nowrap;
+}
+.pc-app .pc-footer p { margin: 0; }
+.pc-app .pc-footer p:first-child { font-size: 13px; }
+.pc-app .pc-footer p:nth-child(2) { font-family: var(--pc-script); font-size: 28px; }
+.pc-app .pc-footer p:last-child { justify-self: end; font-size: 11px; letter-spacing: 1.5px; }
+
+/* ---------- Responsif ---------- */
+@media (max-width: 1050px) {
+    .pc-app .pc-header { grid-template-columns: 1fr auto; }
+    .pc-app .pc-menu { order: 3; grid-column: 1 / -1; justify-content: center; }
+    .pc-app .pc-stamp { grid-column: 2; grid-row: 1; }
+    .pc-app .pc-main { grid-template-columns: 1fr; justify-items: center; }
+    .pc-app .pc-auth { max-width: 600px; }
+}
+
+@media (max-width: 640px) {
+    .pc-app .pc-header { min-height: auto; gap: 18px; padding: 20px; }
+    .pc-app .pc-intro span:last-child { font-size: 13px; }
+    .pc-app .pc-stamp { width: 64px; }
+    .pc-app .pc-menu { width: 100%; gap: 0; justify-content: space-between; }
+    .pc-app .pc-main { gap: 42px; padding: 20px 20px 48px; }
+    .pc-app .pc-heading h1 { font-size: 48px; }
+    .pc-app .pc-footer { grid-template-columns: 1fr; justify-items: center; gap: 10px; text-align: center; white-space: normal; }
+    .pc-app .pc-footer p:nth-child(2) { font-size: 22px; }
+    .pc-app .pc-footer p:last-child { justify-self: center; }
+}
